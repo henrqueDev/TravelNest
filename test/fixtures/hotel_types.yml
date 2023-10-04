@@ -2,8 +2,8 @@
 
 one:
   id: 
-  nome: MyString
+  name: MyString
 
 two:
   id: 
-  nome: MyString
+  name: MyString
