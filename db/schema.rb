@@ -31,8 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_003608) do
   end
 
   create_table "hotel_locations", force: :cascade do |t|
-    t.string "positionX"
-    t.string "positionY"
+    t.decimal "positionX"
+    t.decimal "positionY"
     t.string "CEP"
     t.string "nameStreet"
     t.integer "number"
