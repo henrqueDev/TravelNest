@@ -7,7 +7,13 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 #
-require_relative "./seeds_modules/hotel_types/hotel_types_seed"
+require_relative "./seeds_modules/hotels/hotel_types_seed"
+require_relative "./seeds_modules/hotels/hotels_seed"
+require_relative "./seeds_modules/location_models/country_states_cities_seed"
 include HotelTypesSeed
+include HotelsSeed
+include CountryStatesCitiesSeed
 
-HotelTypesSeed.seed()
+HotelTypesSeed.seedHotelTypes()
+HotelsSeed.seedHotels()
+CountryStatesCitiesSeed.seedCountryStatesCities()
