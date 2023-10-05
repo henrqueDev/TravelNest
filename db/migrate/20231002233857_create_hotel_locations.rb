@@ -1,8 +1,8 @@
 class CreateHotelLocations < ActiveRecord::Migration[7.0]
   def change 
     create_table :hotel_locations do |t|
-      t.string :positionX
-      t.string :positionY
+      t.decimal :positionX
+      t.decimal :positionY
       t.string :CEP
       t.string :nameStreet
       t.integer :number

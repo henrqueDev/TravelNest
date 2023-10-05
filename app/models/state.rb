@@ -1,5 +1,5 @@
 class State < ApplicationRecord
   belongs_to :country
   has_many :cities
-  has_many :locations
+  has_many :hotel_locations
 end
