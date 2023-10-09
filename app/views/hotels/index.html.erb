@@ -1,0 +1,19 @@
+<%= stylesheet_link_tag "application" %>
+<div class="container">
+<table class="table">
+  <tr>
+    <h1>Hotels</h1>
+  </tr>
+
+  <% @hotels.each do |hotel| %>
+    <tr>
+      <td><%= hotel.title %></td>
+      <td><% hotel.hotel_images.each_with_index do |image, index| %>
+      <% break if index >= 3 %>
+        <%= image_tag(image.url, style:"height:80px") %>
+       <% end %>
+       </td>
+    </tr>
+  <% end %>
+</table>
+</div>
