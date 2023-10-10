@@ -13,6 +13,10 @@
         <%= image_tag(image.url, style:"height:80px") %>
        <% end %>
        </td>
+       <td>
+        <%= button_to "Criar Pagamento", "/payments/create", 
+          method: :post %>
+       </td>
     </tr>
   <% end %>
 </table>

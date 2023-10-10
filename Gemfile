@@ -71,4 +71,6 @@ group :test do
   gem "webdrivers"
 end
 
+gem 'grpc'
+
 gem "cssbundling-rails", "~> 1.3"
