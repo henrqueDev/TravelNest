@@ -1,23 +1,43 @@
-<%= stylesheet_link_tag "application" %>
-<div class="container">
-<table class="table">
-  <tr>
-    <h1>Hotels</h1>
-  </tr>
 
-  <% @hotels.each do |hotel| %>
-    <tr>
-      <td><%= hotel.title %></td>
-      <td><% hotel.hotel_images.each_with_index do |image, index| %>
-      <% break if index >= 3 %>
-        <%= image_tag(image.url, style:"height:80px") %>
-       <% end %>
-       </td>
-       <td>
-        <%= button_to "Criar Pagamento", "/payments/create", 
-          method: :post %>
-       </td>
-    </tr>
-  <% end %>
-</table>
+<!-- Inclua Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+
+<!-- Inclua jQuery (Bootstrap 5 requer jQuery) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Inclua Bootstrap 5 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+<div class="container justify-content-center align-items-center">
+  <span>
+    <h1>Hotels</h1>
+  </span>
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Filtrar por</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <% @hotels.each_with_index do |hotel, idCard| %>
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-md-6">
+              <%= carousel_for(hotel.image_urls, "carousel#{idCard}") %>
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <h4 class="card-title">
+                  <%= hotel.title %>
+                </h4>
+                <p class="card-text"><%= hotel.establishment_description %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
