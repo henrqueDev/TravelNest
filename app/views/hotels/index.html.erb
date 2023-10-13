@@ -37,11 +37,11 @@
                     <%= hotel.get_location.state.name %>
                   </span>
                   <p class="card-text"><%= hotel.establishment_description %></p>
-                
               </div>
             
               <div class="col-md-2 justify-content-center align-items-center">
-                <button class="btn mt-4 translate-middle"><i class="bi bi-bookmark-heart"></i></button>
+                <button class="btn"><i class="bi bi-bookmark-heart"></i></button>
+                <span class="btn mt-4 btn-primary"><%= hotel.evaluation %> <%= evaluation_description(hotel.evaluation) %></span>
               </div>
             </div>
             </div>
