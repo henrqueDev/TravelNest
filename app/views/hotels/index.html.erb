@@ -1,17 +1,12 @@
-
-<!-- Inclua Bootstrap 5 CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
 
-<!-- Inclua jQuery (Bootstrap 5 requer jQuery) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<!-- Inclua Bootstrap 5 JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
+<%= stylesheet_link_tag 'hotelList', media: 'all' %>
+
 <div class="container justify-content-center align-items-center">
-  <span>
-    <h1>Hotels</h1>
-  </span>
   <div class="row">
     <div class="col-lg-2">
       <div class="card">
@@ -20,24 +15,62 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-8">
+     <span>
+    <h1>Hotels</h1>
+  </span>
       <% @hotels.each_with_index do |hotel, idCard| %>
-        <div class="card mb-3">
+        <div class="card mb-3 p-2">
           <div class="row no-gutters">
-            <div class="col-md-6">
+            <div class="col-md-5">
               <%= carousel_for(hotel.image_urls, "carousel#{idCard}") %>
             </div>
-            <div class="col-md-6">
-              <div class="card-body">
-                <h4 class="card-title">
-                  <%= hotel.title %>
-                </h4>
-                <p class="card-text"><%= hotel.establishment_description %></p>
+            
+            <div class="card-body col-md-5">
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                  <h4 class="card-title">
+                    <%= hotel.title %>
+                  </h4>
+                  <span class="card-subtitle mb-4 text-muted">
+                    <%= hotel.get_location.city.name %> 
+                    <%= hotel.get_location.state.name %>
+                  </span>
+                  <p class="card-text"><%= hotel.establishment_description %></p>
+                
               </div>
+            
+              <div class="col-md-2 justify-content-center align-items-center">
+                <button class="btn mt-4 translate-middle"><i class="bi bi-bookmark-heart"></i></button>
+              </div>
+            </div>
             </div>
           </div>
         </div>
       <% end %>
+      <div role="navigation" aria-label="Pagination" class="apple_pagination">
+        <div class="page_info">
+          <%= will_paginate(@hotels) %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  const countCarousels = <%= @hotels.size %>;
+
+    for (let i = 0; i < countCarousels; i++) {
+      const carouselId = `#carousel${i}`;
+
+      $(carouselId).carousel({ interval: 4000 });
+
+      $(carouselId).on('click', '.carousel-control-next', function() {
+        $(carouselId).carousel('next');
+      });
+
+      $(carouselId).on('click', '.carousel-control-prev', function() {
+        $(carouselId).carousel('prev');
+      });
+    }
+</script>

@@ -6,4 +6,8 @@ class Hotel < ApplicationRecord
   def image_urls
     self.hotel_images.pluck(:url)
   end
+
+  def get_location
+    self.hotel_location
+  end
 end
