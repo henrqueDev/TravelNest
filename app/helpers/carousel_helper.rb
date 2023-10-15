@@ -42,11 +42,10 @@ module CarouselHelper
 
     def slide_tag(image, is_active)
       options = {
-        class: (is_active ? 'carousel-item  active slide' : 'carousel-item slide'),
-        style: 'object-fit: cover; width: 100%; height: 100%;'
+        class: (is_active ? 'carousel-item  active slide' : 'carousel-item slide')
       }
       #image_tag(image, class: "card-img-top d-block w-100 aspect-ratio", style: "object-fit: cover;", options)
-      content_tag(:div, image_tag(image, class: "card-img-top" , style:'width:23vw; height:22vh;'), options)
+      content_tag(:div, image_tag(image, class: "card-img-top" , style:'width:23rem; height:15rem;'), options)
     end
 
     def controls

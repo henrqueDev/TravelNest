@@ -2,10 +2,8 @@
 
 one:
   name: MyString
-  country: one
   state: one
 
 two:
   name: MyString
-  country: two
   state: two

@@ -7,18 +7,11 @@
 <%= stylesheet_link_tag 'hotelList', media: 'all' %>
 
 <div class="container justify-content-center align-items-center">
-  <div class="row">
-    <div class="col-lg-2">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Filtrar por</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-8">
-     <span>
-    <h1>Hotels</h1>
-  </span>
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-8 mt-3">
+      <span>
+        <h1>Hotels</h1>
+      </span>
       <% @hotels.each_with_index do |hotel, idCard| %>
         <div class="card mb-3 p-2">
           <div class="row no-gutters">
@@ -32,10 +25,13 @@
                   <h4 class="card-title">
                     <%= hotel.title %>
                   </h4>
-                  <span class="card-subtitle mb-4 text-muted">
+                  <span class="card-subtitle mb-4 text-muted fs-5">
+                    <%= hotel.get_location.country.name %>
+                  </span>
+                  <p class="card-subtitle mb-4 text-muted">
                     <%= hotel.get_location.city.name %> 
                     <%= hotel.get_location.state.name %>
-                  </span>
+                  </p>
                   <p class="card-text"><%= hotel.establishment_description %></p>
               </div>
             
