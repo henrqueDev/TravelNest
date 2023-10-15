@@ -77,3 +77,5 @@ gem 'grpc'
 gem "cssbundling-rails", "~> 1.3"
 
 gem "will_paginate", "~> 3.0"
+
+gem 'rails-controller-testing'
