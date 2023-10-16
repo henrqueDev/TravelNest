@@ -1,16 +1,16 @@
 module CarouselHelper
-  def carousel_for(images, identifier = SecureRandom.hex(6))
-    Carousel.new(self, images, identifier).html
+  def carousel_for(images, identifier = SecureRandom.hex(16), imageStyle = 'width:23rem; height:15rem;')
+    Carousel.new(self, images, identifier,imageStyle).html
   end
 
   class Carousel
-    def initialize(view, images, identifier)
-      @view, @images, @identifier = view, images, identifier
+    def initialize(view, images, identifier, style)
+      @view, @images, @identifier, @style = view, images, identifier, style
     end
 
     def html
       content = safe_join([indicators, slides, controls])
-      content_tag(:div, content, id: @identifier, class: 'carousel slide')
+      content_tag(:div, content, id: @identifier, class: 'carousel slide', 'data-interval': '0')
     end
 
     private
@@ -44,8 +44,7 @@ module CarouselHelper
       options = {
         class: (is_active ? 'carousel-item  active slide' : 'carousel-item slide')
       }
-      #image_tag(image, class: "card-img-top d-block w-100 aspect-ratio", style: "object-fit: cover;", options)
-      content_tag(:div, image_tag(image, class: "card-img-top" , style:'width:23rem; height:15rem;'), options)
+      content_tag(:div, image_tag(image, class: "card-img-top" , style: @style), options)
     end
 
     def controls

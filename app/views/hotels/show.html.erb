@@ -1,0 +1,19 @@
+<div class="container justify-content-center align-items-center">
+  
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-8 mt-3">
+      <span>
+        <h1>
+          <%= link_to("", "javascript:history.back()", class:"bi bi-arrow-left-circle btn btn-primary") %>
+          <%= @hotel.title %>
+        </h1>
+      </span>
+        <%= render partial: 'hotel_details', locals: { hotel: @hotel } %>
+        <%= form_with url: "/payments/create", method: "post", class:"d-flex justify-content-end" do |form| %>
+                  <%= form.hidden_field :num, value: @hotel.evaluation %>
+                  <%= form.submit "Enviar Pagamento", class:"btn btn-primary" %>
+        <% end %>
+    </div>
+  </div>
+</div>
