@@ -27,5 +27,9 @@ RSpec.describe HotelsHelper do
             text = helper.evaluation_description(9.8)
             expect(text).to eq "Extraordinário"
         end
+        it "should return 'Null'" do
+            text = helper.evaluation_description(19.8)
+            expect(text).to eq "Null"
+        end
     end
 end
