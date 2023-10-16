@@ -81,3 +81,7 @@ gem "will_paginate", "~> 3.0"
 gem 'rails-controller-testing'
 
 gem 'rspec-rails', '~> 6.0.0'
+
+gem 'simplecov'
+
+gem 'webmock'

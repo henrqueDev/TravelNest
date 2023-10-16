@@ -15,7 +15,7 @@ def requestPayment(num)
         stub = Genqrcode::GenQrCodeService::Stub.new(hostname, :this_channel_is_insecure)
         begin
             message = stub.generate(::Genqrcode::RequestCode.new(rq: msg)).res
-            "Url Pagamento -> #{message}"
+            "#{message}"
         rescue GRPC::BadStatus => e
             abort "ERROR: #{e.message}"
         end
