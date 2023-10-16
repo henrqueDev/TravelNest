@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+<%= stylesheet_link_tag 'hotelList', media: 'all' %>
+<div class="card mb-3 p-2 border-0">
+          <div class="row no-gutters">
+              
+                <div class="row  card-img-top">
+                    <div class="col-md-6 w-100">
+                        <%= carousel_for(hotel.image_urls, "carousel0", 'width: 100%; height:20rem;') %>
+                    </div>
+                </div>
+            
+            <div class="card-body col-md-5">
+            
+            <div class="row no-gutters">
+              <div class="col-md-8">
+                  <h4 class="card-title">
+                    <%= hotel.title %>
+                        <span class="btn btn-primary ml-5"><i class="bi bi-star-fill"></i><%= hotel.evaluation %> <%= evaluation_description(hotel.evaluation) %></span>
+                        <button class="btn"><i class="bi bi-bookmark-heart"></i></button>
+                    
+                  </h4>
+                  <span class="card-subtitle mb-4 text-muted fs-5">
+                    <%= hotel.get_location.country.name %>
+                  </span>
+                  <p class="card-subtitle mb-4 text-muted">
+                    <%= hotel.get_location.city.name %> 
+                    <%= hotel.get_location.state.name %>
+                  </p>
+                  <p class="card-text"><%= hotel.establishment_description %></p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+
+<script>
+      const carouselId = `#carousel0`;
+
+      $(carouselId).carousel(
+      { 
+        pause: true,
+        interval: false
+      });
+
+      $(carouselId).on('click', '.carousel-control-next', function() {
+        $(carouselId).carousel('next');
+      });
+
+      $(carouselId).on('click', '.carousel-control-prev', function() {
+        $(carouselId).carousel('prev');
+      });
+    
+</script>

@@ -79,3 +79,5 @@ gem "cssbundling-rails", "~> 1.3"
 gem "will_paginate", "~> 3.0"
 
 gem 'rails-controller-testing'
+
+gem 'rspec-rails', '~> 6.0.0'
