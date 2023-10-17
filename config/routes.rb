@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :hotels, only: [:index, :show]
   
   post 'payments/create', to: 'payments#create'
-  get '/payments/:url', to: 'payments#show', as: 'show'
+  get '/payments', to: 'payments#show', as: 'show'
 end
