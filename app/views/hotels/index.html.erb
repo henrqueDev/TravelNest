@@ -1,0 +1,17 @@
+<div class="container justify-content-center align-items-center">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-8 mt-3">
+      <span>
+        <h1>Hotels</h1>
+      </span>
+      <% @hotels.each_with_index do |hotel, idCard| %>
+          <%= render(partial: 'hotel', locals: { hotel: hotel, idCard: idCard }) %>
+      <% end %>
+      <div role="navigation" aria-label="Pagination" class="apple_pagination">
+        <div class="page_info">
+          <%= will_paginate(@hotels) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -24,19 +24,19 @@ module HotelsSeed
         nameStreet: " Rua José Ramalho Brunet", number: 110, hotel: hotel2, country: brasilObj, state: paraibaState, city: jpCity)
 
         #Cadastro de imagens do Hotéis
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem1", hotel: hotel1)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem2", hotel: hotel1)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem3", hotel: hotel1)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem4", hotel: hotel1)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem5", hotel: hotel1)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem6", hotel: hotel1)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem_1.jpg", hotel: hotel1)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem_2.jpg", hotel: hotel1)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem_3.jpg", hotel: hotel1)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem_4.jpg", hotel: hotel1)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem_5.jpg", hotel: hotel1)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparSul/imagem_6.jpg", hotel: hotel1)
 
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem1", hotel: hotel2)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem2", hotel: hotel2)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem3", hotel: hotel2)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem4", hotel: hotel2)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem5", hotel: hotel2)
-        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem6", hotel: hotel2)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem_1.jpg", hotel: hotel2)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem_2.jpg", hotel: hotel2)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem_3.jpg", hotel: hotel2)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem_4.jpg", hotel: hotel2)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem_5.jpg", hotel: hotel2)
+        HotelImage.find_or_create_by(url: "joaoPessoaHoteis/enoparNorte/imagem_6.jpg", hotel: hotel2)
 
 
     end
