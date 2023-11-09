@@ -9,8 +9,8 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 require 'grpc'
 require 'genqrcode_services_pb'
 
-def requestPayment(num)
-        msg = "200R$ 2000/01 #{num}"
+def requestPayment(id_user, qnt_cob, id_hotel )
+        msg = "#{id_user} #{qnt_cob} #{id_hotel}"
         hostname = 'localhost:50051'
         stub = Genqrcode::GenQrCodeService::Stub.new(hostname, :this_channel_is_insecure)
         begin
