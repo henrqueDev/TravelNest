@@ -1,0 +1,23 @@
+
+
+one:
+  positionX: 8.999
+  positionY: 8.999
+  CEP: 5806120
+  nameStreet: Rua1
+  number: 123
+  hotel: one
+  country: one
+  state: one
+  city: one
+
+two:
+  positionX: 8.999
+  positionY: 8.999
+  CEP: 5806120
+  nameStreet: Rua2
+  number: 456
+  hotel: two
+  country: two
+  state: two
+  city: two

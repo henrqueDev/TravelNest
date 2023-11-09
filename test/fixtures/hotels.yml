@@ -1,0 +1,14 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one:
+  title: "Enopar Sul"
+  establishment_description: "Venha desfrutar o sul do Enopar Sul!"
+  cnpj: "00.000.001/0002-01"
+  evaluation: 4.2
+  hotel_type: one
+
+two:
+  title: "Enopar Norte"
+  establishment_description: "Venha desfrutar o norte do Enopar Norte!"
+  cnpj: "00.000.002/0002-01"
+  evaluation: 4.8
+  hotel_type: two

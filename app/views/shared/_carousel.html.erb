@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+<div class="carousel slide" id="<%= identifier %>" data-interval="0">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <% images.count.times do |index| %>
+      <li class="<%= (index.zero? ? 'active' : '') %>" data-target="#<%= identifier %>" data-slide-to="<%= index %>"></li>
+    <% end %>
+  </ol>
+
+  <!-- Slides -->
+  <div class="carousel-inner">
+    <% images.each_with_index do |image, index| %>
+      <div class="<%= (index.zero? ? 'carousel-item active slide' : 'carousel-item slide') %>">
+        <%= image_tag image, class: 'card-img-top', style: style %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Controls -->
+  <a class="carousel-control-prev" href="#<%= identifier %>" role="button" data-slide="prev">
+    <i class="carousel-control-prev-icon"></i>
+  </a>
+  <a class="carousel-control-next" href="#<%= identifier %>" role="button" data-slide="next">
+    <i class="carousel-control-next-icon"></i>
+  </a>
+</div>
