@@ -1,3 +1,9 @@
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.js"
+  integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+  crossorigin="anonymous"></script>
+
+
 <div class="container justify-content-center align-items-center">
   <div class="row d-flex justify-content-center">
    <div class="col-lg-2 mt-3 mr-5">
@@ -19,7 +25,12 @@
             <p>Cidade:</p>
           <%= form.select(:city_id, [], { include_blank: "Cidade" }, class: "form-select mt-3", id: "city-select") %>
         </div>
-        <%= form.submit "Buscar", name: nil, class:"btn btn-primary mt-5" %>
+        <div class="mt-3">
+          <p>Avaliação:</p>
+
+          <%= form.range_field(:evaluation, in: 0.0..10.0, step: 1, class: "form-range mt-3", id: "evaluation-range") %>
+        </div>
+        <%= form.submit "Buscar", class:"btn btn-primary mt-5" %>
       <% end %>
     </div>
     <div class="col-lg-7 mt-3">
@@ -43,87 +54,67 @@
 
       
 <script>
- $(document).ready(function() {
-  $("#country-select").on("change", function() {
-    var countryId = $(this).val();
-    var stateSelect = $("#state-select");
-    var citySelect = $("#city-select");
-    if (countryId == ''){
-      stateSelect.empty();
-      citySelect.empty();
-      stateSelect.append($("<option>", {
-          value: null,
-          text: null
-        }));
-
-      citySelect.append($("<option>", {
-          value: null,
-          text: null
-        }));
-      return;
+function fetchData(url, params, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+        callback(data);
+      } else {
+        console.error('Erro ao buscar dados:', xhr.status);
+      }
     }
+  };
 
+  var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+  xhr.open('GET', url + '?' + queryString);
+  xhr.send();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('country-select').addEventListener('change', function() {
+    var countryId = this.value;
+    var stateSelect = document.getElementById('state-select');
+    var citySelect = document.getElementById('city-select');
     
-    $.get("/filter/get_states", { country_id: countryId }, function(data) {
-      
-      
-      stateSelect.empty();
-      citySelect.empty();
+    if (countryId === '') {
+      // Clear state and city options
+      stateSelect.innerHTML = '<option value=""></option>';
+      citySelect.innerHTML = '<option value=""></option>';
+    } else {
+      fetchData('/filter/get_states', { country_id: countryId }, function(data) {
+        stateSelect.innerHTML = '<option value=""></option>';
+        citySelect.innerHTML = '<option value=""></option>';
 
-      stateSelect.append($("<option>", {
-          value: null,
-          text: null
-        }));
-
-      citySelect.append($("<option>", {
-          value: null,
-          text: null
-        }));
-
-      data.states.forEach(function(state) {
-        stateSelect.append($("<option>", {
-          value: state.id,
-          text: state.name
-        }));
+        data.states.forEach(function(state) {
+          var option = document.createElement('option');
+          option.value = state.id;
+          option.textContent = state.name;
+          stateSelect.appendChild(option);
+        });
       });
-     
-      
-    });
+    }
   });
-});
 
-$(document).ready(function() {
-  $("#state-select").on("change", function() {
+  document.getElementById('state-select').addEventListener('change', function() {
+    var citySelect = document.getElementById('city-select');
+    var stateId = this.value;
     
-    var citySelect = $("#city-select");
-      
-    var stateId = $(this).val();
-    if (stateId == ''){
-      citySelect.empty();
-
-      citySelect.append($("<option>", {
-          value: null,
-          text: null
-        }));
+    if (stateId === '') {
+      citySelect.innerHTML = '<option value=""></option>';
       return;
     }
-    // Obtenha os dados de estados e cidades com base no país selecionado
-    $.get("/filter/get_cities", { state_id: stateId }, function(data) {
-      citySelect.empty();
 
-      citySelect.append($("<option>", {
-          value: null,
-          text: null
-        }));
+    fetchData('/filter/get_cities', { state_id: stateId }, function(data) {
+      citySelect.innerHTML = '<option value=""></option>';
 
       data.cities.forEach(function(city) {
-        citySelect.append($("<option>", {
-          value: city.id,
-          text: city.name
-        }));
+        var option = document.createElement('option');
+        option.value = city.id;
+        option.textContent = city.name;
+        citySelect.appendChild(option);
       });
-
-      
     });
   });
 });
