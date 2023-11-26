@@ -13,4 +13,4 @@ include HotelsSeed
 
 CountryStatesCitiesSeed.seedCountryStatesCities()
 HotelTypesSeed.seedHotelTypes()
-HotelsSeed.seedHotels()
+#HotelsSeed.seedHotels()

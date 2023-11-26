@@ -89,3 +89,4 @@ gem "bcrypt", "~> 3.1.7"
 gem "devise", "~> 4.9"
 
 gem "cpf_cnpj"
+gem "cancancan", "~> 3.5"

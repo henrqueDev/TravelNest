@@ -1,12 +1,11 @@
 class Hotel < ApplicationRecord
+  belongs_to :user
   belongs_to :hotel_type
   has_one :hotel_location
-  has_many :hotel_images
+  has_many_attached :images
 
-  def image_urls
-    self.hotel_images.pluck(:url)
-  end
-
+  accepts_nested_attributes_for :hotel_location, :allow_destroy => true
+  
   def get_location
     self.hotel_location
   end

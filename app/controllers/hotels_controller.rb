@@ -1,6 +1,8 @@
 class HotelsController < ApplicationController
+
+
     def index
-      @hotels = Hotel.includes(:hotel_images)
+      @hotels = Hotel.all
       if filter_params_present?
         @hotels = apply_filters(@hotels)
       else
@@ -8,11 +10,57 @@ class HotelsController < ApplicationController
       end
       @hotels = @hotels.paginate(page: params[:page], per_page: 10)
     end
+
+    def new
+        @hotel = Hotel.new
+        @hotel.build_hotel_location
+
+        @countries = Country.all
+      
+        @states = State.all
+      
+        @cities = City.all
+    end
+      
+
+    def create
+      @hotel = Hotel.new(hotel_params)
+      @hotel.user = current_user
+    
+      if params[:hotel][:images].present?
+        @hotel.images.attach(params[:hotel][:images])
+      end
+      if @hotel.save
+        # Processamento das imagens
+
+        redirect_to @hotel, notice: 'Hotel criado com sucesso.'
+      else
+        @countries = Country.all
+        @states = State.all
+        @cities = City.all
+        render :new
+      end
+    end
+    
   
     def show
       @hotel = Hotel.find(params[:id])
     end
-  
+
+    
+    private
+    
+    def hotel_params
+      params.require(:hotel).permit(
+        :id,
+        :title,
+        :establishment_description,
+        :evaluation,
+        :cnpj,
+        :hotel_type_id,
+        hotel_location_attributes: [:id, :nameStreet, :number, :CEP, :positionX, :positionY , :country_id, :state_id, :city_id]
+      )
+    end
     private
   
     def filter_params_present?

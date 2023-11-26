@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :hotels
   validates :username, presence: true
   validates :email, presence: true
   validates :cpf, format: { with: /^\d{11}$/,
