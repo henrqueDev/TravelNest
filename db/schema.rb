@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_08_211517) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_211517) do
     t.index ["state_id"], name: "index_hotel_locations_on_state_id"
   end
 
+  create_table "hotel_reservations", force: :cascade do |t|
+    t.integer "adults_quantity"
+    t.integer "children_quantity"
+    t.float "total_price", null: false
+    t.date "check_in", null: false
+    t.date "check_out", null: false
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.index ["room_id"], name: "index_hotel_reservations_on_room_id"
+    t.index ["user_id"], name: "index_hotel_reservations_on_user_id"
+  end
+
   create_table "hotel_types", force: :cascade do |t|
     t.string "name"
   end
@@ -56,7 +68,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_211517) do
     t.string "cnpj"
     t.float "evaluation"
     t.bigint "hotel_type_id", null: false
+    t.bigint "user_id"
     t.index ["hotel_type_id"], name: "index_hotels_on_hotel_type_id"
+    t.index ["user_id"], name: "index_hotels_on_user_id"
+  end
+
+  create_table "room_options", force: :cascade do |t|
+    t.string "title"
+    t.integer "max_people"
+    t.integer "rooms_quantity"
+    t.float "price_per_day"
+    t.float "price_per_Person"
+    t.float "price_per_PersonChild"
+    t.boolean "free_wifi"
+    t.boolean "is_children_free"
+    t.boolean "is_refundable"
+    t.bigint "hotel_id"
+    t.index ["hotel_id"], name: "index_room_options_on_hotel_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "room_option_id"
+    t.index ["room_option_id"], name: "index_rooms_on_room_option_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -83,6 +116,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_08_211517) do
   add_foreign_key "hotel_locations", "countries"
   add_foreign_key "hotel_locations", "hotels"
   add_foreign_key "hotel_locations", "states"
+  add_foreign_key "hotel_reservations", "rooms"
+  add_foreign_key "hotel_reservations", "users"
   add_foreign_key "hotels", "hotel_types"
+  add_foreign_key "hotels", "users"
+  add_foreign_key "room_options", "hotels"
+  add_foreign_key "rooms", "room_options"
   add_foreign_key "states", "countries"
 end
