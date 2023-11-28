@@ -2,6 +2,7 @@ class HotelsController < ApplicationController
 
 
     def index
+     
       @hotels = Hotel.all
       if filter_params_present?
         @hotels = apply_filters(@hotels)
@@ -32,7 +33,7 @@ class HotelsController < ApplicationController
       end
       if @hotel.save
         # Processamento das imagens
-
+        
         redirect_to @hotel, notice: 'Hotel criado com sucesso.'
       else
         @countries = Country.all
@@ -45,6 +46,9 @@ class HotelsController < ApplicationController
   
     def show
       @hotel = Hotel.find(params[:id])
+      @hotel_reservation = HotelReservation.new
+      @rooms_options = RoomOption.where(hotel_id: params[:id])
+
     end
 
     

@@ -1,0 +1,49 @@
+<%= form_for(@room_option) do |f| %>
+      <div class="form-group">
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :max_people, "Maximum People" %>
+    <%= f.number_field :max_people, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rooms_quantity, "Rooms quantity" %>
+    <%= f.number_field :rooms_quantity, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price_per_day, "Default Price" %>
+    <%= f.number_field :price_per_day, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price_per_Person, "Price per Person" %>
+    <%= f.number_field :price_per_Person, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price_per_PersonChild, "Price per Child" %>
+    <%= f.number_field :price_per_PersonChild, class: "form-control" %>
+  </div>
+
+  <div class="form-checkbox">
+    <%= f.check_box :free_wifi, label: "Free Wi-Fi" %>
+  </div>
+
+  <div class="form-checkbox">
+    <%= f.check_box :is_children_free, label: "Children are Free" %>
+  </div>
+
+  <div class="form-checkbox">
+    <%= f.check_box :is_refundable, label: "Refundable" %>
+  </div>
+
+  <%= f.hidden_field :hotel_id, value: @hotel.id %>
+
+  <div class="form-group">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>

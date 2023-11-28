@@ -1,3 +1,4 @@
 class RoomOption < ApplicationRecord
-    has_many :rooms
+    belongs_to :hotel
+    has_many :hotel_reservations
 end

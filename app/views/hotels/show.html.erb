@@ -9,7 +9,23 @@
           <%= @hotel.title %>
         </h1>
       </span>
+          <%= link_to("Adicionar Opção de Quarto", new_room_option_path(hotel_id: @hotel.id)) %>
         <%= render partial: 'hotel_details', locals: { hotel: @hotel } %>
+
+        <%= form_with(url: hotel_reservations_path, method: "post") do |form| %>
+          <%= form.label :check_in %>
+          <%= form.date_field :check_in, min: Date.current %>
+          <%= form.label :check_out %>
+          <%= form.date_field :check_out, min: Date.current %>
+
+
+          <%= form.hidden_field :user_id, value:  current_user.present? ? current_user.id : nil %>
+          <%= form.hidden_field :room_id, value: 1 %>
+          <%= form.number_field :adults_quantity %>
+          <%= form.number_field :children_quantity %>
+          <%= form.submit "Reservar ja!" %>
+        <% end %>
+
         <%= form_with url: "/payments/create", method: "post", class:"d-flex justify-content-end" do |form| %>
                   <%= form.hidden_field :qnt_cob, value: 0.01 %>
                   <%= form.hidden_field :id_user, value: current_user.present? ? current_user.id : nil %>

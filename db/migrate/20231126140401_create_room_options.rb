@@ -4,15 +4,16 @@ class CreateRoomOptions < ActiveRecord::Migration[7.0]
       t.string :title
 
       t.integer :max_people
-      t.float :price_default, null: false
-      t.float :price_per_Person, null: false
+      t.integer :rooms_quantity
+      t.float :price_per_day
+      t.float :price_per_Person
       t.float :price_per_PersonChild
 
-      t.boolean :free_wifi, null: false
-      t.boolean :is_children_free, null: false
-      t.boolean :is_refundable, null: false
+      t.boolean :free_wifi
+      t.boolean :is_children_free
+      t.boolean :is_refundable
 
-      t.references :hotel, foreign_key: true
+      t.belongs_to :hotel, foreign_key: true
     end
   end
 end
