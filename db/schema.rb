@@ -110,7 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.boolean "is_available", default: true, null: false
     t.bigint "hotel_id"
     t.bigint "room_option_id"
     t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
@@ -121,6 +120,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
     t.string "name"
     t.bigint "country_id", null: false
     t.index ["country_id"], name: "index_states_on_country_id"
+  end
+
+  create_table "user_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "state_id", null: false
+    t.index ["state_id"], name: "index_user_types_on_state_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -150,4 +155,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
   add_foreign_key "rooms", "hotels"
   add_foreign_key "rooms", "room_options"
   add_foreign_key "states", "countries"
+  add_foreign_key "user_types", "states"
 end

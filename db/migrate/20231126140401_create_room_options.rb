@@ -11,7 +11,6 @@ class CreateRoomOptions < ActiveRecord::Migration[7.0]
 
       t.boolean :free_wifi
       t.boolean :is_children_free
-      t.boolean :is_refundable
 
       t.belongs_to :hotel, foreign_key: true
     end

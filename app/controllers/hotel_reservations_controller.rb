@@ -1,27 +1,31 @@
 class HotelReservationsController < ApplicationController
     def create
 
-        @rooms = Room.where(room_option_id: params[:room_option])
-        @room_selected = nil
+        @rooms = Room.all.where(room_option_id: params[:room_option_id])
         @user =   User.find(params[:user_id])
-
+        @room = nil
+        for room in @rooms do
+          if room.hotel_reservation == nil
+            @room = room
+            break
+          #respond_to do |format|
+          #  format.html { redirect_to show_path(url: hotel.get_url) }
+          #end
+          end
+        end
         @reservation = HotelReservation.new(adults_quantity: params[:adults_quantity], children_quantity: params[:children_quantity],
           check_in: params[:check_in],
           check_out: params[:check_out],
+          room: @room,
           user: @user)
 
-        for room in @rooms do
-          if(!room.hotel_reservation.present)
-            @reservation.room = room
-            @room_selected = room
-            break
-          end
-        end
         
-        @reservation.total_price = @room_selected.room_option.price_per_day + @room_selected.room_option.price_per_Person + @room_selected.room_option.price_per_PersonChild
+
+
+        @reservation.total_price = @room.room_option.price_per_day + @room.room_option.price_per_Person + @room.room_option.price_per_PersonChild
         if @reservation.valid?
           @reservation.save
-          @room_selected.update(is_available: false)
+          @room.save
         else
           render :new
         end

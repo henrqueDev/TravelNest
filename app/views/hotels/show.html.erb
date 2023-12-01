@@ -20,7 +20,7 @@
 
 
           <%= form.hidden_field :user_id, value:  current_user.present? ? current_user.id : nil %>
-          <%= form.hidden_field :room_id, value: 1 %>
+          <%= form.hidden_field :room_option_id, value: 1 %>
           <%= form.number_field :adults_quantity %>
           <%= form.number_field :children_quantity %>
           <%= form.submit "Reservar ja!" %>
