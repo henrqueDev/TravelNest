@@ -4,6 +4,7 @@ class RoomOptionsController < ApplicationController
       end
     
       def show
+        @room_option = RoomOption.find(params[:id])
       end
     
       def new
@@ -42,7 +43,12 @@ class RoomOptionsController < ApplicationController
     
         redirect_to room_options_url, notice: "Room option was successfully destroyed."
       end
-    
+
+      def get_room_option
+          room_option = RoomOption.find(params[:id])
+          render json: room_option
+      end
+
       private
     
         def set_room_option

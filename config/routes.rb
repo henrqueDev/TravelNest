@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'homepage', to: 'homepage#index'
   get 'filter/get_states'
   get 'filter/get_cities'
+  get 'rooms/get_room'
+  get 'room_options/get_room_option'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

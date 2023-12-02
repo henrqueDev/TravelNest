@@ -1,3 +1,8 @@
+
+
+  <input type="text" id="dateInput">
+
+
 <div class="container justify-content-center align-items-center">
   
 
@@ -11,16 +16,18 @@
       </span>
           <%= link_to("Adicionar Opção de Quarto", new_room_option_path(hotel_id: @hotel.id)) %>
         <%= render partial: 'hotel_details', locals: { hotel: @hotel } %>
-
+        <p id="price_per_day_banner"> </p>
         <%= form_with(url: hotel_reservations_path, method: "post") do |form| %>
+          
+          <%= form.select(:room_option_id, RoomOption.all.collect { |ro|  [ro.title, ro.id] },  id: "room_option_id" )  %>
+          
           <%= form.label :check_in %>
-          <%= form.date_field :check_in, min: Date.current %>
+          <%= form.date_field :check_in, min: Date.current-1 %>
           <%= form.label :check_out %>
           <%= form.date_field :check_out, min: Date.current %>
 
 
           <%= form.hidden_field :user_id, value:  current_user.present? ? current_user.id : nil %>
-          <%= form.hidden_field :room_option_id, value: 1 %>
           <%= form.number_field :adults_quantity %>
           <%= form.number_field :children_quantity %>
           <%= form.submit "Reservar ja!" %>
@@ -35,3 +42,68 @@
     </div>
   </div>
 </div>
+
+
+<script>
+
+function fetchData(url, params, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+        callback(data);
+      } else {
+        console.error('Erro ao buscar dados:', xhr.status);
+      }
+    }
+  };
+
+  var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+  xhr.open('GET', url + '?' + queryString);
+  xhr.send();
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  
+  document.getElementById("room_option_id").addEventListener("change", function(ro) {
+    const selectedIndex = this.selectedIndex;
+    const selectedOption = this.options[selectedIndex];
+    
+    fetchData('/room_options/get_room_option', { id: selectedOption.value }, function(room_option) {
+
+      console.log(room_option)
+      document.getElementById("price_per_day_banner").innerHTML = room_option.price_per_day
+    })
+  })
+
+})
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script>
+    // Disable specific dates (e.g., January 1, 2023)
+    var disabledDates = ['2023-12-30', '2023-01-02'];
+    var date_now = new Date();
+
+    $( function() {
+      $( "#dateInput" ).datepicker({
+        dateFormat: 'yy-mm-dd',
+        minDate: date_now.toISOString().slice(0, -14),
+        beforeShowDay: function(date) {
+          var formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+          return [disabledDates.indexOf(formattedDate) === -1];
+        },
+        onSelect: function(dateText, inst) {
+          if (disabledDates.includes(dateText)) {
+            alert('This date is disabled.');
+            $(this).val('');
+            
+          }
+        }
+      });
+    });
+</script>
