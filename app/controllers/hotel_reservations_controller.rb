@@ -1,5 +1,8 @@
 class HotelReservationsController < ApplicationController
-    def create
+    
+  before_action :authenticate_user!
+
+  def create
 
         @rooms = Room.all.where(room_option_id: params[:room_option_id])
         @user =   User.find(params[:user_id])
@@ -34,7 +37,7 @@ class HotelReservationsController < ApplicationController
         else
           render :new
         end
-      end
+  end
     
       private
       

@@ -49,6 +49,11 @@ class RoomOptionsController < ApplicationController
           render json: room_option
       end
 
+      def get_all
+        room_options = RoomOption.all
+        render json: room_options
+      end
+
       private
     
         def set_room_option
