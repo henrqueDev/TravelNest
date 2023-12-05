@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'filter/get_cities'
   get 'rooms/get_room'
   get 'room_options/get_room_option'
+  get 'room_options/get_room_option_dates_disabled'
   get 'room_options/get_all'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

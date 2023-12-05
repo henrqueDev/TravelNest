@@ -3,22 +3,26 @@ class HotelReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-
+        #@hotel = Hotel.find(room_option_id : params[:room_option_id])
         @rooms = Room.all.where(room_option_id: params[:room_option_id])
         @user =   User.find(params[:user_id])
         @room = nil
-        if(room.room_option)
+        @dates = []
         for room in @rooms do
           if room.hotel_reservation == nil
-            @room = room
-            break
-          #respond_to do |format|
-          #  format.html { redirect_to show_path(url: hotel.get_url) }
-          #end
+              @room = room
+              break
+          else 
+              @dates.push(room.hotel_reservation.check_in..room.hotel_reservation.check_out)
           end
         end
+        
         if @room == nil
-          #checar todos os quartos, se um dos
+          (@dates[0]..@dates[@dates.length-1]).each do |date|
+            if @dates.count(date) < @rooms.length
+              @dates.delete(date)  
+            end
+          end
         end
 
         @reservation = HotelReservation.new(adults_quantity: params[:adults_quantity], children_quantity: params[:children_quantity],
