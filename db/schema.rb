@@ -89,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
     t.string "establishment_description"
     t.string "cnpj"
     t.float "evaluation"
+    t.boolean "auto_choose_room"
     t.bigint "hotel_type_id", null: false
     t.bigint "user_id"
     t.index ["hotel_type_id"], name: "index_hotels_on_hotel_type_id"
@@ -104,7 +105,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
     t.float "price_per_PersonChild"
     t.boolean "free_wifi"
     t.boolean "is_children_free"
-    t.boolean "is_refundable"
     t.bigint "hotel_id"
     t.index ["hotel_id"], name: "index_room_options_on_hotel_id"
   end

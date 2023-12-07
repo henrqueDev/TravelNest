@@ -4,6 +4,7 @@ class CreateHotels < ActiveRecord::Migration[7.0]
       t.string :title
       t.string :establishment_description
       t.string :cnpj
+      t.float :evaluation
       t.boolean :auto_choose_room
       t.references :hotel_type, null: false, foreign_key: true
     end

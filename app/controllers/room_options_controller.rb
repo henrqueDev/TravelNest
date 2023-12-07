@@ -58,11 +58,13 @@ class RoomOptionsController < ApplicationController
           
           dates = []
           for room in rooms do
-            if room.hotel_reservation != nil
-              n = room.hotel_reservation.check_in.to_date
-              m = room.hotel_reservation.check_out.to_date
-              (n..m).each do |date|
-                dates.push(date)
+            if room.hotel_reservations != nil
+              for reservation in room.hotel_reservations do
+                n = reservation.check_in.to_date
+                m = reservation.check_out.to_date
+                (n..m).each do |date|
+                  dates.push(date)
+                end
               end
             end
           end
