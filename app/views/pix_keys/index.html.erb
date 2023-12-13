@@ -14,9 +14,11 @@
         <td><%= pix_key.key %></td>
         <td><%= pix_key.hotel.title %></td>
         <td>
-          <%= link_to "Show", pix_key_path(pix_key), class: "btn btn-info" %>
-          <%= link_to "Edit", edit_pix_key_path(pix_key), class: "btn btn-warning" %>
-          <%= link_to "Destroy", pix_key_path(pix_key), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <div id="">
+            <%= link_to "Show", pix_key_path(pix_key), class: "btn btn-info" %>
+            <%= link_to "Edit", edit_pix_key_path(pix_key), class: "btn btn-warning" %>
+            <%= button_to "Destroy", pix_key_path(pix_key), method: :delete, class: "btn btn-danger" %>
+          </div>
         </td>
       </tr>
     <% end %>

@@ -11,7 +11,6 @@ require 'genqrcode_services_pb'
 
 def requestPayment(pix_key, id_user, qnt_cob, id_hotel, check_in, check_out, id_room_option)
         msg = "#{pix_key} #{id_user} #{"%.2f" % qnt_cob} #{id_hotel} #{check_in} #{check_out} #{id_room_option}"
-        puts(msg)
         hostname = 'localhost:50051'
         stub = Genqrcode::GenQrCodeService::Stub.new(hostname, :this_channel_is_insecure)
         begin

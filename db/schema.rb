@@ -71,7 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
   create_table "hotel_reservations", force: :cascade do |t|
     t.integer "adults_quantity"
     t.integer "children_quantity"
-    t.float "total_price", null: false
     t.date "check_in", null: false
     t.date "check_out", null: false
     t.bigint "room_id"
@@ -89,7 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
     t.string "establishment_description"
     t.string "cnpj"
     t.float "evaluation"
-    t.boolean "auto_choose_room"
     t.bigint "hotel_type_id", null: false
     t.bigint "user_id"
     t.index ["hotel_type_id"], name: "index_hotels_on_hotel_type_id"

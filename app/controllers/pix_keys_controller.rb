@@ -21,7 +21,7 @@ class PixKeysController < ApplicationController
       @pix_key = PixKey.new(pix_key_params)
       
       if @pix_key.save
-        redirect_to @pix_key, notice: 'Pix key was successfully created.'
+        redirect_to pix_keys_path, notice: 'Pix key was successfully created.'
       else
         render :new
       end
@@ -34,7 +34,7 @@ class PixKeysController < ApplicationController
     # PATCH/PUT /pix_keys/1
     def update
       if @pix_key.update(pix_key_params)
-        redirect_to @pix_key, notice: 'Pix key was successfully updated.'
+        redirect_to pix_keys_path, notice: 'Pix key was successfully updated.'
       else
         render :edit
       end
