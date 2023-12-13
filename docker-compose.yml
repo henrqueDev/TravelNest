@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  rails_app:
+    build: .
+    ports:
+      - "3000:3000"
+    command: rails db:create && rails db:migrate && rails db:seed && rails server -b 0.0.0.0
+    depends_on: 
+      - db
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: travelnest

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  
+  resources :hotel_reservations, only: [:create]
+  
   devise_for :users
   root to: "homepage#index" 
   get 'homepage', to: 'homepage#index'
@@ -8,14 +12,15 @@ Rails.application.routes.draw do
   get 'room_options/get_room_option'
   get 'room_options/get_room_option_dates_disabled'
   get 'room_options/get_all'
+  get 'room_status/get_room_option'
+  get 'room_status/get_room_option_dates_disabled'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :hotels, only: [:index, :create, :new, :show]
+  resources :hotels, only: [:index, :create, :new, :show,:edit, :update, :destroy]
   resources :room_options, only: [:index, :create, :new, :show]
-  resources :hotel_reservations, only: [:create]
-  
+  resources :pix_keys
   post 'payments/create', to: 'payments#create'
   get '/payments', to: 'payments#show', as: 'show'
 

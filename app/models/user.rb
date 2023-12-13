@@ -4,7 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :hotels
+  has_many :hotels, dependent: :destroy
+
+  enum user_type: [:user_default, :user_hotel, :admin  ]
+
   validates :username, presence: true
   validates :email, presence: true
   validates :cpf, format: { with: /^\d{11}$/,

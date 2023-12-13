@@ -1,4 +1,4 @@
 class Country < ApplicationRecord
-    has_many :states
-    has_many :hotel_locations
+    has_many :states, dependent: :destroy
+    has_many :hotel_locations, dependent: :destroy
 end

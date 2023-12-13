@@ -1,5 +1,10 @@
 require 'date'
 class RoomOptionsController < ApplicationController
+
+    before_action :authenticate_user!
+
+    #load_and_authorize_resource
+
     def index
         @room_options = RoomOption.all
       end

@@ -4,12 +4,12 @@
 
 
 require_relative "./seeds_modules/hotels/hotel_types_seed"
-require_relative "./seeds_modules/hotels/hotels_seed"
+#require_relative "./seeds_modules/hotels/hotels_seed"
 require_relative "./seeds_modules/location_models/country_states_cities_seed"
 
 include CountryStatesCitiesSeed
 include HotelTypesSeed
-include HotelsSeed
+#include HotelsSeed
 
 CountryStatesCitiesSeed.seedCountryStatesCities()
 HotelTypesSeed.seedHotelTypes()

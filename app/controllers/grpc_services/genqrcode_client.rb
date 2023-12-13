@@ -9,13 +9,14 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 require 'grpc'
 require 'genqrcode_services_pb'
 
-def requestPayment(id_user, qnt_cob, id_hotel )
-        msg = "#{id_user} #{qnt_cob} #{id_hotel}"
+def requestPayment(pix_key, id_user, qnt_cob, id_hotel, check_in, check_out, id_room_option)
+        msg = "#{pix_key} #{id_user} #{"%.2f" % qnt_cob} #{id_hotel} #{check_in} #{check_out} #{id_room_option}"
+        puts(msg)
         hostname = 'localhost:50051'
         stub = Genqrcode::GenQrCodeService::Stub.new(hostname, :this_channel_is_insecure)
         begin
             message = stub.generate(::Genqrcode::RequestCode.new(rq: msg)).res
-            "#{message}"
+            "#{message}"    
         rescue GRPC::BadStatus => e
             abort "ERROR: #{e.message}"
         end

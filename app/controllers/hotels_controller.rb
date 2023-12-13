@@ -1,5 +1,6 @@
 class HotelsController < ApplicationController
-
+    
+    load_and_authorize_resource
 
     def index
      
@@ -9,7 +10,7 @@ class HotelsController < ApplicationController
       else
         @hotels = @hotels.order(:title)
       end
-      @hotels = @hotels.paginate(page: params[:page], per_page: 10)
+      @hotels = @hotels.paginate(page: params[:page], per_page: 1)
     end
 
     def new
@@ -23,6 +24,16 @@ class HotelsController < ApplicationController
         @cities = City.all
     end
       
+    def edit
+      @hotel = Hotel.find(params[:id])
+      @hotel.build_hotel_location
+
+      @countries = Country.all
+    
+      @states = State.all
+    
+      @cities = City.all
+    end
 
     def create
       @hotel = Hotel.new(hotel_params)
@@ -32,9 +43,9 @@ class HotelsController < ApplicationController
         @hotel.images.attach(params[:hotel][:images])
       end
       if @hotel.save
-        # Processamento das imagens
-        
-        redirect_to @hotel, notice: 'Hotel criado com sucesso.'
+        respond_to do |format|
+          format.html { redirect_to @hotel, notice: 'Hotel criado com sucesso.' }
+          end
       else
         @countries = Country.all
         @states = State.all

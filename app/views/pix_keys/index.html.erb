@@ -1,0 +1,26 @@
+<h1>Pix Keys</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Hotel</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pix_keys.each do |pix_key| %>
+      <tr>
+        <td><%= pix_key.key %></td>
+        <td><%= pix_key.hotel.title %></td>
+        <td>
+          <%= link_to "Show", pix_key_path(pix_key), class: "btn btn-info" %>
+          <%= link_to "Edit", edit_pix_key_path(pix_key), class: "btn btn-warning" %>
+          <%= link_to "Destroy", pix_key_path(pix_key), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Pix Key", new_pix_key_path, class: "btn btn-primary" %>

@@ -4,7 +4,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.0]
   def self.up
     create_table :users do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: ""
+      t.string :email, null: false, default: ""
       t.string :username, null: false
       t.string :cpf, null: false
       t.string :encrypted_password, null: false, default: ""
@@ -15,7 +15,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.0]
       ## Rememberable
       t.datetime :remember_created_at
 
-      #t.references :user_type, foreign_key: true
+      t.integer :user_type, null: false, default: 0
 
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false

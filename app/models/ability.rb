@@ -6,11 +6,28 @@ class Ability
   def initialize(user)
     # Define abilities for the user here. For example:
     
-    can :read, :all
-    return unless user.present?
-
+    can :read, Hotel, :all
+    can :read, Room, :all
+    can :read, City, :all
+    can :read, State, :all
+    can :read, Country, :all
+    can :read, HotelLocation, :all
+    can :read, HotelType, :all
+    #can :read, RoomOption
+    can :all, FilterController
+    can :all, RoomsController
     
-    can [:create, :update], Hotel, user: user
+    can :read, RoomOption
+    return unless user.present?
+    
+    can :all, PaymentsController
+
+    if user.user_hotel?
+      can [:read, :create, :update, :delete], Hotel
+      can :all, HotelsController
+      can :all, RoomOptionsController
+      can :all, RoomOption
+    end
 
     return unless user.admin?
     

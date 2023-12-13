@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
     t.index ["user_id"], name: "index_hotels_on_user_id"
   end
 
+  create_table "pix_keys", force: :cascade do |t|
+    t.string "key"
+    t.bigint "hotel_id"
+    t.index ["hotel_id"], name: "index_pix_keys_on_hotel_id"
+  end
+
   create_table "room_options", force: :cascade do |t|
     t.string "title"
     t.integer "max_people"
@@ -122,12 +128,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
     t.index ["country_id"], name: "index_states_on_country_id"
   end
 
-  create_table "user_types", force: :cascade do |t|
-    t.string "name"
-    t.bigint "state_id", null: false
-    t.index ["state_id"], name: "index_user_types_on_state_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username", null: false
@@ -136,6 +136,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "user_type", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -151,9 +152,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_212943) do
   add_foreign_key "hotel_reservations", "users"
   add_foreign_key "hotels", "hotel_types"
   add_foreign_key "hotels", "users"
+  add_foreign_key "pix_keys", "hotels"
   add_foreign_key "room_options", "hotels"
   add_foreign_key "rooms", "hotels"
   add_foreign_key "rooms", "room_options"
   add_foreign_key "states", "countries"
-  add_foreign_key "user_types", "states"
 end
