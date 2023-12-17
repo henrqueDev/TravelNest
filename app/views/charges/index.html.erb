@@ -1,0 +1,6 @@
+<div>
+    <% if current_user.present? %>
+        <%= get_all(current_user) %>
+    <% end %>
+</div>
+

@@ -3,11 +3,7 @@ class PixKeysController < ApplicationController
   
     # GET /pix_keys
     def index
-      @pix_keys = PixKey.all
-    end
-  
-    # GET /pix_keys/1
-    def show
+      @pix_keys = PixKey.all.where(hotel_id: params[:hotel_id])
     end
   
     # GET /pix_keys/new

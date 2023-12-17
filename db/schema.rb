@@ -45,11 +45,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.bigint "state_id", null: false
+    t.index ["name"], name: "index_cities_on_name", unique: true
     t.index ["state_id"], name: "index_cities_on_state_id"
   end
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
   create_table "hotel_locations", force: :cascade do |t|
@@ -69,10 +71,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
   end
 
   create_table "hotel_reservations", force: :cascade do |t|
-    t.integer "adults_quantity"
-    t.integer "children_quantity"
+    t.integer "adults_quantity", null: false
+    t.integer "children_quantity", null: false
     t.date "check_in", null: false
     t.date "check_out", null: false
+    t.float "total_price", null: false
     t.bigint "room_id"
     t.bigint "user_id"
     t.index ["room_id"], name: "index_hotel_reservations_on_room_id"
@@ -98,6 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
     t.string "key"
     t.bigint "hotel_id"
     t.index ["hotel_id"], name: "index_pix_keys_on_hotel_id"
+    t.index ["key"], name: "index_pix_keys_on_key", unique: true
   end
 
   create_table "room_options", force: :cascade do |t|
@@ -124,6 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_234027) do
     t.string "name"
     t.bigint "country_id", null: false
     t.index ["country_id"], name: "index_states_on_country_id"
+    t.index ["name"], name: "index_states_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -93,3 +93,5 @@ gem "cpf_cnpj"
 gem "cancancan", "~> 3.5"
 
 gem 'rqrcode', '~> 0.10.1'
+
+gem 'httparty'

@@ -9,8 +9,8 @@ $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 require 'grpc'
 require 'genqrcode_services_pb'
 
-def requestPayment(pix_key, id_user, qnt_cob, id_hotel, check_in, check_out, id_room_option)
-        msg = "#{pix_key} #{id_user} #{"%.2f" % qnt_cob} #{id_hotel} #{check_in} #{check_out} #{id_room_option}"
+def requestPayment(pix_key, user_id, total_price, hotel_id, check_in, check_out, room_option_id, children_quantity, adults_quantity)
+        msg = "#{pix_key} #{user_id} #{"%.2f" % total_price} #{hotel_id} #{check_in} #{check_out} #{room_option_id} #{children_quantity} #{adults_quantity}"
         hostname = 'localhost:50051'
         stub = Genqrcode::GenQrCodeService::Stub.new(hostname, :this_channel_is_insecure)
         begin

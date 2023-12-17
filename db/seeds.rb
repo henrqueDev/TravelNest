@@ -13,4 +13,6 @@ include HotelTypesSeed
 
 CountryStatesCitiesSeed.seedCountryStatesCities()
 HotelTypesSeed.seedHotelTypes()
+user1 = User.create(email: 'user1@example.com', username: 'user1', cpf: '11111111111', password: 'password1', user_type: 2)
+user1.save
 #HotelsSeed.seedHotels()

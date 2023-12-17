@@ -77,7 +77,7 @@ class HotelReservationsController < ApplicationController
       check_in: params[:check_in],
       check_out: params[:check_out],
       room: room,
-      total_price: params[:qnt_cob].to_f.round(2),
+      total_price: params[:total_price].to_f.round(2),
       user: user
     )
 

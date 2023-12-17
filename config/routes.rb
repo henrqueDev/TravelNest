@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   resources :hotels, only: [:index, :create, :new, :show,:edit, :update, :destroy]
   resources :room_options, only: [:index, :create, :new, :show]
   resources :pix_keys
+  resources :charges
+  
   post 'payments/create', to: 'payments#create'
   get '/payments', to: 'payments#show', as: 'show'
 

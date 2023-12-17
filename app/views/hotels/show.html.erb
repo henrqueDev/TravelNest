@@ -13,12 +13,14 @@
           <% if  current_user.id == @hotel.user.id %>
             <%= link_to("Adicionar Opção de Quarto", new_room_option_path(hotel_id: @hotel.id)) %>
             <%= link_to("Adicionar Chave Pix", new_pix_key_path(hotel_id: @hotel.id)) %>
-            <%= link_to("Listar chaves pix", pix_key_path) %>
+            <%= link_to("Listar chaves pix", pix_keys_path(hotel_id: @hotel.id)) %>
           <% end %>
         
         <% else %>
           <span></span>
         <% end %>
+
+        
 
         <%= render partial: 'hotel_details', locals: { hotel: @hotel } %>
         <p id="price_per_day_banner"> </p>
@@ -167,3 +169,5 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+  
