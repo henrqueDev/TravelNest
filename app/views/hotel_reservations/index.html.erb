@@ -7,6 +7,9 @@
       <th>Children</th>
       <th>Preço total</th>
       <th>Hotel</th>
+      <th>Opção de quarto</th>
+      <th>Check-in</th>
+      <th>Check-out</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -17,6 +20,9 @@
         <td><%= reservation.children_quantity %></td>
         <td>R$ <%= reservation.total_price %></td>
         <td><%= reservation.room.room_option.hotel.title %></td>
+        <td><%= reservation.room.room_option.title %></td>
+        <td><%= reservation.check_in %></td>
+        <td><%= reservation.check_out %></td>
         <td>
           <div class="btn-group">
             <%= button_to "Cancelar reserva", hotel_reservation_path(reservation), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>

@@ -3,7 +3,8 @@ class HotelsController < ApplicationController
     load_and_authorize_resource
 
     def index
-      if current_user.user_hotel?
+
+      if current_user.present? and current_user.user_hotel?
         @hotels = current_user.hotels
       else
         @hotels = Hotel.all
