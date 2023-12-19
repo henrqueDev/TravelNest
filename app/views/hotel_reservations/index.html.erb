@@ -1,0 +1,29 @@
+<h1>Reservas</h1>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>Adults</th>
+      <th>Children</th>
+      <th>Preço total</th>
+      <th>Hotel</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.adults_quantity %></td>
+        <td><%= reservation.children_quantity %></td>
+        <td>R$ <%= reservation.total_price %></td>
+        <td><%= reservation.room.room_option.hotel.title %></td>
+        <td>
+          <div class="btn-group">
+            <%= button_to "Cancelar reserva", hotel_reservation_path(reservation), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+            <!-- You can add more buttons here if needed -->
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

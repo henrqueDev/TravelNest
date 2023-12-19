@@ -10,7 +10,10 @@ require 'grpc'
 require 'genqrcode_services_pb'
 
 def requestPayment(pix_key, user_id, total_price, hotel_id, check_in, check_out, room_option_id, children_quantity, adults_quantity)
-        msg = "#{pix_key} #{user_id} #{"%.2f" % total_price} #{hotel_id} #{check_in} #{check_out} #{room_option_id} #{children_quantity} #{adults_quantity}"
+        user = User.find(user_id)
+        hotel = Hotel.find(hotel_id)
+        hotel_name = hotel.title.split(' ')
+        msg = "#{pix_key} #{user_id} #{"%.2f" % total_price} #{hotel_id} #{check_in} #{check_out} #{room_option_id} #{children_quantity} #{adults_quantity} #{user.email} #{hotel_name.join('')}"
         hostname = 'localhost:50051'
         stub = Genqrcode::GenQrCodeService::Stub.new(hostname, :this_channel_is_insecure)
         begin

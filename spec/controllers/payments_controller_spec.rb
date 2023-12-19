@@ -14,9 +14,7 @@ RSpec.describe PaymentsController, type: :controller do
             sign_in user
 
             get :show, params: {  
-                pix_key: pix_key,
-                id_user: user_id,
-                id_hotel: id_hotel
+                url: "12391829"
             }
 
             expect(response).to have_http_status(200)

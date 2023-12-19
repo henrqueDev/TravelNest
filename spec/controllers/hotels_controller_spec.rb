@@ -16,7 +16,6 @@ RSpec.describe HotelsController, type: :controller do
       user = User.create(email: 'test@example.com', password: 'password123', username: 'testando', cpf: '12345678910', user_type: 1)
       # Faça login do usuário criado (método sign_in é fornecido pelo Devise)
       user.save
-      print(user.id)
       sign_in user
 
       # Agora você pode acessar a action protegida pelo before_action

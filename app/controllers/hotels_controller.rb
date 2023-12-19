@@ -1,10 +1,13 @@
 class HotelsController < ApplicationController
-    
+    before_action :authenticate_user!, only: :my_hotels
     load_and_authorize_resource
 
     def index
-     
-      @hotels = Hotel.all
+      if current_user.user_hotel?
+        @hotels = current_user.hotels
+      else
+        @hotels = Hotel.all
+      end
       if filter_params_present?
         @hotels = apply_filters(@hotels)
       else
@@ -61,6 +64,20 @@ class HotelsController < ApplicationController
       @rooms_options = RoomOption.where(hotel_id: params[:id])
 
     end
+
+    def my_hotels
+      @hotels = Hotel.all.where(user_id: current_user.id)
+      if filter_params_present?
+        @hotels = apply_filters(@hotels)
+      else
+        @hotels = @hotels.order(:title)
+      end
+      @hotels = @hotels.paginate(page: params[:page], per_page: 1)
+    end
+
+    #def destroy
+    #  @hotel = Hotel.find(params[:id])
+    #end
 
     
     private

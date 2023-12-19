@@ -6,12 +6,19 @@ class PaymentsController < ApplicationController
     include GenqrcodeClient
 
     def show  
-        @url = params[:url]
-
+        @ure = params[:url]
+        @code = RQRCode::QRCode.new(@ure)
+        @url = @code.as_svg(
+            offset:0,
+            color: '000',
+            shape_rendering: 'crispEdges',
+            module_size: 6
+        ) 
     end
 
     def create
 
+        return unless params[:pix_key].present?
 
         if (Date.parse(params[:check_in]) >= Date.parse(params[:check_out]))
             render json: { error: 'Data invalida!' }

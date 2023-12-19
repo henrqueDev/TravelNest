@@ -30,11 +30,13 @@
   </div>
 
   <div class="form-checkbox">
-    <%= f.check_box :free_wifi, label: "Free Wi-Fi" %>
+    <%= f.label :free_wifi, "Wifi gratis?" %>
+    <%= f.check_box :free_wifi, label: "Wifi gratis?" %>
   </div>
 
   <div class="form-checkbox">
-    <%= f.check_box :is_children_free, label: "Children are Free" %>
+    <%= f.label :is_children_free, "Crianças pagam?" %>
+    <%= f.check_box :is_children_free, label: "Crianças pagam?" %>
   </div>
 
   <%= f.hidden_field :hotel_id, value: @hotel.id %>

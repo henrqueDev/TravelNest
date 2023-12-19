@@ -18,7 +18,14 @@
               </li>
               <% if can? :create, Hotel %>
                  <li class="nav-item"> <%= link_to "Criar Hotel", '/hotels/new', class:"btn btn-dark ml-3" %> </li>
+                 
+                <li>
+                  <%= link_to "Meus hoteis", hotels_path, class:"btn btn-dark ml-3" %>
+                </li>
               <% end %>
+              <li>
+                 <%= link_to "Minhas reservas", '/hotel_reservations', class:"btn btn-dark ml-3" %>
+              </li>
               <li class="nav-item">
                  <%= button_to "Sair", destroy_user_session_path, method: :delete, class:"btn btn-dark ml-3" %>
               </li>

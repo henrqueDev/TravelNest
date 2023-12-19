@@ -95,3 +95,7 @@ gem "cancancan", "~> 3.5"
 gem 'rqrcode', '~> 0.10.1'
 
 gem 'httparty'
+
+gem "bunny", ">= 2.14.2", " < 3.0"
+
+gem 'shoulda-matchers'

@@ -19,11 +19,11 @@ RSpec.describe User, type: :model do
   describe 'User creation' do
     it 'creates two different users in the test database' do
 
-      user1 = User.create(email: 'user1@example.com', username: 'user1', cpf: '11111111111', password: 'password1', user_type: 0)
-      user2 = User.create(email: 'user2@example.com', username: 'user2', cpf: '22222222222', password: 'password2', user_type: 1)
+      user1 = User.create(email: 'user2@example.com', username: 'user1', cpf: '11111111111', password: 'password1', user_type: 0)
+      user2 = User.create(email: 'user3@example.com', username: 'user2', cpf: '22222222222', password: 'password2', user_type: 1)
       user1.save
       user2.save
-      expect(User.count).to eq(2)
+      expect(User.count).to eq(3)
       expect(user1).to be_valid
       expect(user2).to be_valid
     end

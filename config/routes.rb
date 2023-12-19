@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   
-  resources :hotel_reservations, only: [:create]
+  resources :hotel_reservations
   
   devise_for :users
   root to: "homepage#index" 
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :hotels, only: [:index, :create, :new, :show,:edit, :update, :destroy]
+  resources :hotels, only: [:index, :create, :new, :show, :edit, :update, :destroy]
   resources :room_options, only: [:index, :create, :new, :show]
   resources :pix_keys
   resources :charges

@@ -1,7 +1,7 @@
 <h1>Pix Keys</h1>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
       <th>Key</th>
       <th>Hotel</th>
@@ -14,10 +14,9 @@
         <td><%= pix_key.key %></td>
         <td><%= pix_key.hotel.title %></td>
         <td>
-          <div id="">
-            <%= link_to "Show", pix_key_path(pix_key), class: "btn btn-info" %>
+          <div class="btn-group">
             <%= link_to "Edit", edit_pix_key_path(pix_key), class: "btn btn-warning" %>
-            <%= button_to "Destroy", pix_key_path(pix_key), method: :delete, class: "btn btn-danger" %>
+            <%= button_to "Destroy", pix_key_path(pix_key), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
           </div>
         </td>
       </tr>
