@@ -1,0 +1,23 @@
+<div>
+    <% if current_user.present? %>
+    <h1>Cobranças</h1>
+
+        <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+            <th>Status</th>
+            <th>Preço total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% get_all(current_user).each do |charge| %>
+            <tr>
+                <td><%= charge['cobranca']['status'] %></td>
+                <td>R$ <%= charge['cobranca']['total_price'] %></td>
+            </tr>
+            <% end %>
+        </tbody>
+        </table>
+    <% end %>
+</div>
+

@@ -1,3 +1,6 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -9,8 +12,34 @@
         <ul class="navbar-nav">
           <li class="nav-item"><%= link_to 'Hotéis', '/hotels', class:"nav-link active" %></li>
           <li class="nav-item"><%= link_to 'Pousadas', '#', class:"nav-link active" %></li>
+          <% if user_signed_in? %>
+              <li class="nav-item"> 
+                 <%= link_to("#{current_user.username}", "/users/edit", class:"btn btn-dark mr-5") %>
+              </li>
+              <% if can? :create, Hotel %>
+                 <li class="nav-item"> <%= link_to "Criar Hotel", '/hotels/new', class:"btn btn-dark ml-3" %> </li>
+                 
+                <li>
+                  <%= link_to "Meus hoteis", hotels_path, class:"btn btn-dark ml-3" %>
+                </li>
+              <% end %>
+              <li>
+                 <%= link_to "Minhas reservas", '/hotel_reservations', class:"btn btn-dark ml-3" %>
+              </li>
+              <li class="nav-item">
+                 <%= button_to "Sair", destroy_user_session_path, method: :delete, class:"btn btn-dark ml-3" %>
+              </li>
+          <% else %>
+              <li class="nav-item">
+                <%= link_to 'Cadastre-se', '/users/sign_up', class:"btn btn-dark" %>
+                <%= link_to 'Login', '/users/sign_in', class:"btn btn-dark" %>
+              </li>
+          <% end %>
         </ul>
       </div>
+
     </div>
   </nav>
+
+
 </header>

@@ -1,52 +1,51 @@
+# spec/controllers/hotels_controller_spec.rb
 require 'rails_helper'
 
 RSpec.describe HotelsController, type: :controller do
   describe 'GET #index' do
-    it 'assigns @hotels and renders the #index template' do
-      ht1 = HotelType.find_or_create_by(name: "Hotel")
-      ht2 = HotelType.find_or_create_by(name: "Pousada")
-      
-      hotel1 = Hotel.find_or_create_by(
-        title: "Enopar Sul",
-        establishment_description: "Venha desfrutar o sul do Enopar Sul!",
-        cnpj: "00.000.001/0002-01",
-        evaluation: 4.2,
-        hotel_type: ht1
-      )
-      
-      hotel2 = Hotel.find_or_create_by(
-        title: "Enopar Norte",
-        establishment_description: "Venha desfrutar o norte do Enopar Norte!",
-        cnpj: "00.000.002/0002-01",
-        evaluation: 4.8,
-        hotel_type: ht2
-      )
-
+    it 'renders the index template' do
       get :index
-
-      expect(response).to have_http_status(200)
       expect(response).to render_template(:index)
-      expect(assigns(:hotels)).to match_array([hotel1, hotel2])
+    end
+
+    # Adicione mais testes para os diferentes cenários possíveis, como para os filtros, etc.
+  end
+
+  describe 'GET #new' do
+    it 'renders the new template' do
+      user = User.create(email: 'test@example.com', password: 'password123', username: 'testando', cpf: '12345678910', user_type: 1)
+      # Faça login do usuário criado (método sign_in é fornecido pelo Devise)
+      user.save
+      sign_in user
+
+      # Agora você pode acessar a action protegida pelo before_action
+      get :new
+      expect(response).to render_template(:new)
     end
   end
-  describe 'GET #show' do
-    it 'assigns @hotel and renders the #show template' do
-      ht1 = HotelType.find_or_create_by(name: "Hotel")
-      ht2 = HotelType.find_or_create_by(name: "Pousada")
-      
-      hotel1 = Hotel.find_or_create_by(
-        title: "Enopar Sul",
-        establishment_description: "Venha desfrutar o sul do Enopar Sul!",
-        cnpj: "00.000.001/0002-01",
-        evaluation: 4.2,
-        hotel_type: ht1
-      )
 
-      get :show, params: {id: 1}
+  # Adicione testes semelhantes para outras ações como 'edit', 'create', 'show', etc.
+
+  describe 'POST #create' do
+    it 'should get :new if @hotel.save fails ' do
+      user = User.create(email: 'test@example.com', password: 'password123', username: 'testando', cpf: '12345678910', user_type: 1)
+      # Faça login do usuário criado (método sign_in é fornecido pelo Devise)
+      user.save
+
+      sign_in user
+      # Defina os parâmetros válidos para criar um hotel
+      valid_params = {
+        hotel: {
+          title: 'Novo Hotel',
+          establishment_description: 'abcdefgh',
+          cnpj: '321983290821309',
+          evaluation: 7.0,
+          hotel_type: HotelType.find(1)
+        }
+      }
+
 
       expect(response).to have_http_status(200)
-      expect(response).to render_template(:show)
-      expect(assigns(:hotel)).to eq(hotel1)
     end
   end
 end

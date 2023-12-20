@@ -1,15 +1,26 @@
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.js"
+  integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc="
+  crossorigin="anonymous"></script>
+
+
 <div class="container justify-content-center align-items-center">
   <div class="row d-flex justify-content-center">
-    <div class="col-lg-8 mt-3">
+   <div class="col-lg-2 mt-3 mr-5">
+      <%= render(partial: 'hotel_filter') %>
+    </div>
+    <div class="col-lg-7 mt-3">
       <span>
         <h1>Hotels</h1>
       </span>
-      <% @hotels.each_with_index do |hotel, idCard| %>
-          <%= render(partial: 'hotel', locals: { hotel: hotel, idCard: idCard }) %>
-      <% end %>
-      <div role="navigation" aria-label="Pagination" class="apple_pagination">
-        <div class="page_info">
-          <%= will_paginate(@hotels) %>
+          <% @hotels.each_with_index do |hotel, idCard| %>
+            <%= render(partial: 'hotel', locals: { hotel: hotel, idCard: idCard }) %>
+          <% end %>
+          <div role="navigation" aria-label="Pagination" class="apple_pagination">
+            <div class="page_info">
+              <%= will_paginate(@hotels) %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

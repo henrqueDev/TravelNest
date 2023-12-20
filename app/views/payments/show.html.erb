@@ -1,9 +1,33 @@
-<div class="container w-100 d-flex justify-content-center align-items-center mt-5">
-<div class="card mb-3 p-2 border-2 w-25 ">
-            
-            <div class="card-body text-center">
-            <p><%= @url %></p>
-          </div>
-        </div>
 
+<input hidden id="codigo" value=<%=@ure%>>
+<div class="container w-100 d-flex justify-content-center align-items-center mt-5">
+<div class="card mb-3 p-2 border-2 w-45 ">
+            
+            <%= @url.html_safe %>
+            
         </div>
+        
+</div>
+<div class="container w-25 d-flex justify-content-center align-items-center mt-5">
+<div class="card mb-3 p-2 border-2 w-45 ">
+<p><%= @ure %></p>
+
+<button onclick="copy()">Copiar</button>
+</div>
+</div>
+
+<script>
+  function copy() {
+    // Get the text field
+    var copyText = document.getElementById("codigo");
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+    // Alert the copied text
+  }
+</script>

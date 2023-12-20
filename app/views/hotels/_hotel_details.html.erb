@@ -4,14 +4,14 @@
               
                 <div class="row  card-img-top">
                     <div class="col-md-6 w-100">
-                        <%= render(partial: '/shared/carousel', locals: { images: hotel.image_urls , identifier: "carousel0", style:'width: 100%; height:20rem;' }) %>
+                        <%= render(partial: '/shared/carousel', locals: { images: hotel.images , identifier: "carousel0", style:'width: 100%; height:20rem;' }) %>
                     </div>
                 </div>
             
             <div class="card-body col-md-5">
             
             <div class="row no-gutters">
-              <div class="col-md-8">
+              <div class="col-md-6">
                   <h4 class="card-title">
                     <%= hotel.title %>
                         <span class="btn btn-primary ml-5"><i class="bi bi-star-fill"></i><%= hotel.evaluation %> <%= evaluation_description(hotel.evaluation) %></span>
@@ -26,6 +26,16 @@
                     <%= hotel.get_location.state.name %>
                   </p>
                   <p class="card-text"><%= hotel.establishment_description %></p>
+                    
+              </div>
+              <div class="col-md-6">
+                <%= render(partial: '/shared/map', locals: { 
+                  x: hotel.get_location.positionX, 
+                  y: hotel.get_location.positionY,
+                  nameStreet: hotel.get_location.nameStreet,
+                  number: hotel.get_location.number,
+                  cep: hotel.get_location.CEP
+                 }) %>
               </div>
             </div>
             </div>

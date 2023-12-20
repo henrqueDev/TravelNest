@@ -1,0 +1,155 @@
+<h1>Criar hotel</h1>
+
+<%= form_for(@hotel) do |form| %>
+
+
+  <% if @hotel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hotel.errors.count, "erro") %> ao salvar o hotel:</h2>
+
+      <ul>
+      <% @hotel.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cnpj %>
+    <%= form.text_field :cnpj %>
+  </div>
+
+  <div class="field">
+    <%= form.label :establishment_description %>
+    <%= form.text_area :establishment_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :evaluation %>
+    <%= form.number_field :evaluation, min: 1, max: 10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hotel_location %>
+    <%= form.fields_for :hotel_location do |location_form| %>
+      
+      <div class="field">
+        <%= location_form.label :positionX %>
+        <%= location_form.number_field :positionX, step: :any %>
+      </div>
+      <div class="field">
+        <%= location_form.label :positionY %>
+        <%= location_form.number_field :positionY, step: :any %>
+      </div>
+
+      <div class="field">
+          <p>Pais:</p>
+          <%= location_form.select(:country_id, Country.all.collect { |c| [c.name, c.id] }, { include_blank: "Pais" }, class: "form-select mt-3", id: "country-select") %>
+      </div>
+
+      <div class="field">
+          <p>Estado:</p>
+          <%= location_form.select(:state_id, [], { include_blank: "Estado" }, class: "form-select mt-3", id: "state-select") %>
+      </div>
+
+      <div class="field">
+            <p>Cidade:</p>
+          <%= location_form.select(:city_id, [], { include_blank: "Cidade" }, class: "form-select mt-3", id: "city-select") %>
+      </div>
+
+      <div class="field">
+        <%= location_form.label :nameStreet %>
+        <%= location_form.text_field :nameStreet%>
+      </div>
+
+    <% end %>
+  </div>
+  <div class="field">
+    <%= form.label :hotel_type_id %>
+    <%= form.select :hotel_type_id, HotelType.all.map { |hotel_type| [hotel_type.name, hotel_type.id] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Criar hotel" %>
+  </div>
+<% end %>
+
+
+<script>
+function fetchData(url, params, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+        callback(data);
+      } else {
+        console.error('Erro ao buscar dados:', xhr.status);
+      }
+    }
+  };
+
+  var queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+  xhr.open('GET', url + '?' + queryString);
+  xhr.send();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('country-select').addEventListener('change', function() {
+    var countryId = this.value;
+    var stateSelect = document.getElementById('state-select');
+    var citySelect = document.getElementById('city-select');
+    
+    if (countryId === '') {
+      // Clear state and city options
+      stateSelect.innerHTML = '<option value=""></option>';
+      citySelect.innerHTML = '<option value=""></option>';
+    } else {
+      fetchData('/filter/get_states', { country_id: countryId }, function(data) {
+        stateSelect.innerHTML = '<option value=""></option>';
+        citySelect.innerHTML = '<option value=""></option>';
+
+        data.states.forEach(function(state) {
+          var option = document.createElement('option');
+          option.value = state.id;
+          option.textContent = state.name;
+          stateSelect.appendChild(option);
+        });
+      });
+    }
+  });
+
+  document.getElementById('state-select').addEventListener('change', function() {
+    var citySelect = document.getElementById('city-select');
+    var stateId = this.value;
+    
+    if (stateId === '') {
+      citySelect.innerHTML = '<option value=""></option>';
+      return;
+    }
+
+    fetchData('/filter/get_cities', { state_id: stateId }, function(data) {
+      citySelect.innerHTML = '<option value=""></option>';
+
+      data.cities.forEach(function(city) {
+        var option = document.createElement('option');
+        option.value = city.id;
+        option.textContent = city.name;
+        citySelect.appendChild(option);
+      });
+    });
+  });
+});
+
+</script>

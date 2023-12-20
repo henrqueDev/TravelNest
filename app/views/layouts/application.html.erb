@@ -8,11 +8,28 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body>
+  
     <%= render 'layouts/header' %>
     <%= yield %>
     <%= render 'shared/footer' %>
+
+    <% if notice.present? %>
+          <script>
+            Swal.fire({
+              position: "top-end",
+              icon: 'warning',
+              title: "<%= notice %>",
+              showConfirmButton: false,
+              timer: 1500
+            })
+          </script>
+    <% end %>
+
   </body>
 </html>

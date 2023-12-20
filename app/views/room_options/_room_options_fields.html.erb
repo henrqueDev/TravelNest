@@ -1,0 +1,12 @@
+<%= form_for(@room_option) do |f| %>
+      <%= f.text_field :title %>
+      <%= f.number_field :max_people %>
+      <%= f.number_field :price_default %>
+     <%= f.number_field :price_per_Person %>
+     <%= f.number_field :price_per_PersonChild %>
+
+     <%= f.check_box :free_wifi %>
+     <%= f.check_box :is_children_free %>
+     <%= f.check_box :is_refundable %>
+<% end %>
+
